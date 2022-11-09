@@ -9,6 +9,7 @@ class MarketPlayerOffer(BaseModel):
     price: int = None
     date: datetime = None
     valid_until_date: datetime = None
+    user_name: str = None
 
     def __init__(self, d: dict = {}):
         self._json_transform = {
@@ -16,6 +17,7 @@ class MarketPlayerOffer(BaseModel):
             "validUntilDate": parse_date
         }
         self._json_mapping = {
-            "validUntilDate": "valid_until_date"
+            "validUntilDate": "valid_until_date",
+            "userName": "user_name"
         }
         super().__init__(d)
