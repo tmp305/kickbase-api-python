@@ -158,6 +158,16 @@ class Kickbase:
         else:
             raise KickbaseException()
 
+    def league_user_feed(self, start_index: int, league: Union[str, LeagueData], user: Union[str, User]) -> [FeedItem]:
+        league_id = self._get_league_id(league)
+
+        r = self._do_get("/leagues/{}/users/{}/feed?filter=12%2C2&start={}".format(league_id, user, start_index), True)
+
+        if r.status_code == 200:
+            return [FeedItem(v) for v in r.json()["items"]]
+        else:
+            raise KickbaseException()            
+
     def post_feed_item(self, comment: str, league: Union[str, LeagueData]):
         league_id = self._get_league_id(league)
 
